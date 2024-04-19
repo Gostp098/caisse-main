@@ -42,6 +42,7 @@ public class ClientController {
     public List<Client> retrieveAllClients(){
         return clientService.retrieveAllClients();
     }
+
     /*  public ResponseEntity<List<Client>> retrieveAllClients() {
         List<Client> clients = clientService.retrieveAllClients();
         return ResponseEntity.ok(clients);

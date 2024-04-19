@@ -8,6 +8,8 @@ import com.caisse.service.ArticleService;
 import java.util.List;
 
 public class ArticleServiceImpl implements ArticleService {
+
+
     @Override
     public ArticleDto save(ArticleDto dto) {
         return null;
@@ -46,5 +48,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public void delete(Integer id) {
 
+    }
+
+    public static class CategoryServiceImpl {
     }
 }

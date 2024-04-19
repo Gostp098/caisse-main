@@ -3,6 +3,8 @@ package com.caisse.dto;
 
 import com.caisse.entity.Category;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.time.Instant;
 import java.util.List;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +21,7 @@ public class CategoryDto {
 
     private Integer idEntreprise;
 
+    private Instant creationDate;
     @JsonIgnore
     private List<ArticleDto> articles;
 
@@ -32,6 +35,7 @@ public class CategoryDto {
                 .id(category.getId())
                 .code(category.getCode())
                 .designation(category.getDesignation())
+                .creationDate(category.getCreationDate())
                 .idEntreprise(category.getIdEntreprise())
                 .build();
     }
@@ -45,6 +49,7 @@ public class CategoryDto {
         Category category = new Category();
         category.setId(categoryDto.getId());
         category.setCode(categoryDto.getCode());
+        category.setCreationDate(categoryDto.getCreationDate());
         category.setDesignation(categoryDto.getDesignation());
         category.setIdEntreprise(categoryDto.getIdEntreprise());
 

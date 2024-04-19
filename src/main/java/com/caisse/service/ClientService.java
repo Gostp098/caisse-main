@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @AllArgsConstructor
 @Slf4j
-public class ClientService implements IClientService { // Make sure to implement IClientService
+public class ClientService implements IClientService {
 
     private final ClientRepository clientRepository;
 

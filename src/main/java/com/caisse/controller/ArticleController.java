@@ -15,39 +15,68 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @CrossOrigin("*")
-@RequestMapping("/articles")
+@RequestMapping("/article")
 public class ArticleController {
 /*
-    private final ArticleService articleService;
-
     @Autowired
-    public ArticleController(ArticleService articleService) {
-        this.articleService = articleService;
+    private ArticleService articleService;
+
+
+
+    @PostMapping("/articles")
+    // Assuming this is where you save articles
+
+
+    public ArticleDto createArticle(@RequestBody ArticleDto articleDto) {
+        return articleService.save(articleDto);
+    }
+    /*
+    public ArticleDto save(@RequestBody ArticleDto dto) {
+        return articleService.save(dto);
+    *
+
+    @GetMapping("/articles/{id}") // Endpoint to find article by ID
+    public ArticleDto findById(@PathVariable Integer id) {
+        return articleService.findById(id);
     }
 
-    @PostMapping
-    public ResponseEntity<ArticleDto> saveArticle(@RequestBody ArticleDto articleDto) {
-        ArticleDto savedArticle = articleService.save(articleDto);
-        return new ResponseEntity<>(savedArticle, HttpStatus.CREATED);
+
+    @GetMapping("/articles/code/{codeArticle}") // Endpoint to find article by code
+    public ArticleDto findByCodeArticle(@PathVariable String codeArticle) {
+        return articleService.findByCodeArticle(codeArticle);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ArticleDto> getArticleById(@PathVariable Integer id) {
-        ArticleDto articleDto = articleService.findById(id);
-        return ResponseEntity.ok(articleDto);
+
+    @GetMapping("/articles") // Endpoint to retrieve all articles
+    public List<ArticleDto> findAll() {
+        return articleService.findAll();
     }
 
-    @GetMapping("/code/{code}")
-    public ResponseEntity<ArticleDto> getArticleByCode(@PathVariable String code) {
-        ArticleDto articleDto = articleService.findByCodeArticle(code);
-        return ResponseEntity.ok(articleDto);
+    @Override
+    @GetMapping("/articles/{id}/ventes") // Endpoint to retrieve sales history for an article
+    public List<LigneVenteDto> findHistoriqueVentes(@PathVariable Integer idArticle) {
+        return articleService.findHistoriqueVentes(idArticle);
     }
 
-    @GetMapping
-    public ResponseEntity<List<ArticleDto>> getAllArticles() {
-        List<ArticleDto> articles = articleService.findAll();
-        return ResponseEntity.ok(articles);
+    @Override
+    @GetMapping("/articles/{id}/commandes-client") // Endpoint to retrieve client order history for an article
+    public List<LigneCommandeClientDto> findHistoriaueCommandeClient(@PathVariable Integer idArticle) {
+        return articleService.findHistoriaueCommandeClient(idArticle);
     }
 
-   */ // Add other endpoints for your service methods here, e.g., findHistoriqueVentes, findHistoriqueStockUp, etc.
+
+
+
+    @GetMapping("/articles/category/{idCategory}") // Endpoint to retrieve all articles by category ID
+    public List<ArticleDto> findAllArticleByIdCategory(@PathVariable Integer idCategory) {
+        return articleService.findAllArticleByIdCategory(idCategory);
+    }
+
+
+    @DeleteMapping("/articles/{id}") // Endpoint to delete an article by ID
+    public void delete(@PathVariable Integer id) {
+        articleService.delete(id);
+    }
+*/
+
 }

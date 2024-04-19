@@ -18,8 +18,6 @@ public class ClientDto {
 
     private String adresse;
 
- //   private AdresseDto adresse;
-
     private String photo;
 
     private String mail;
@@ -38,7 +36,6 @@ public class ClientDto {
                 .nom(client.getNom())
                 .prenom(client.getPrenom())
                 .adresse(client.getAdresse())
-              //  .adresse(AdresseDto.fromEntity(client.getAdresse()))
                 .mail(client.getMail())
                 .numTel(client.getNumTel())
                 .idEntreprise(client.getIdEntreprise())
@@ -54,7 +51,6 @@ public class ClientDto {
         client.setNom(dto.getNom());
         client.setPrenom(dto.getPrenom());
         client.setAdresse(dto.getAdresse());
-     //   client.setAdresse(AdresseDto.toEntity(dto.getAdresse()));
         client.setMail(dto.getMail());
         client.setNumTel(dto.getNumTel());
         client.setIdEntreprise(dto.getIdEntreprise());
