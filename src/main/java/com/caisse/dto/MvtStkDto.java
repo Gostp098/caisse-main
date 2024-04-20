@@ -1,16 +1,17 @@
 package com.caisse.dto;
 
-import com.caisse.entity.MvStock;
+import com.caisse.entity.MvtStk;
 import com.caisse.entity.SourceMvtStk;
 import com.caisse.entity.TypeMvtStk;
-import lombok.*;
-
 import java.math.BigDecimal;
 import java.time.Instant;
+import lombok.Builder;
+import lombok.Data;
 
 @Data
 @Builder
-public class MvStockDto {
+public class MvtStkDto {
+
     private Integer id;
 
     private Instant dateMvt;
@@ -25,28 +26,28 @@ public class MvStockDto {
 
     private Integer idEntreprise;
 
-    public static MvStockDto fromEntity(MvStock mvtstk) {
-        if (mvtstk == null) {
+    public static MvtStkDto fromEntity(MvtStk mvtStk) {
+        if (mvtStk == null) {
             return null;
         }
 
-        return MvStockDto.builder()
-                .id(mvtstk.getId())
-                .dateMvt(mvtstk.getDateMvt())
-                .quantite(mvtstk.getQuantite())
-                .article(ArticleDto.fromEntity(mvtstk.getArticle()))
-                .typeMvt(mvtstk.getTypeMvt())
-                .sourceMvt(mvtstk.getSourceMvt())
-                .idEntreprise(mvtstk.getIdEntreprise())
+        return MvtStkDto.builder()
+                .id(mvtStk.getId())
+                .dateMvt(mvtStk.getDateMvt())
+                .quantite(mvtStk.getQuantite())
+                .article(ArticleDto.fromEntity(mvtStk.getArticle()))
+                .typeMvt(mvtStk.getTypeMvt())
+                .sourceMvt(mvtStk.getSourceMvt())
+                .idEntreprise(mvtStk.getIdEntreprise())
                 .build();
     }
 
-    public static MvStock toEntity(MvStockDto dto) {
+    public static MvtStk toEntity(MvtStkDto dto) {
         if (dto == null) {
             return null;
         }
 
-        MvStock mvtStk = new MvStock();
+        MvtStk mvtStk = new MvtStk();
         mvtStk.setId(dto.getId());
         mvtStk.setDateMvt(dto.getDateMvt());
         mvtStk.setQuantite(dto.getQuantite());
