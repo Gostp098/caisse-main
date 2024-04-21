@@ -1,10 +1,6 @@
 package com.caisse.controller;
-
 import com.caisse.dto.ArticleDto;
-import com.caisse.dto.LigneFactureDto;
-import com.caisse.dto.LigneStockUpDto;
 import com.caisse.service.ArticleService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,70 +9,60 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 @CrossOrigin("*")
-@RequestMapping("/article")
+@RequestMapping("/articles")
 public class ArticleController {
-/*
+
+    private final ArticleService articleService;
+
     @Autowired
-    private ArticleService articleService;
-
-
-
-    @PostMapping("/articles")
-    // Assuming this is where you save articles
-
-
-    public ArticleDto createArticle(@RequestBody ArticleDto articleDto) {
-        return articleService.save(articleDto);
-    }
-    /*
-    public ArticleDto save(@RequestBody ArticleDto dto) {
-        return articleService.save(dto);
-    *
-
-    @GetMapping("/articles/{id}") // Endpoint to find article by ID
-    public ArticleDto findById(@PathVariable Integer id) {
-        return articleService.findById(id);
+    public ArticleController(ArticleService articleService) {
+        this.articleService = articleService;
     }
 
-
-    @GetMapping("/articles/code/{codeArticle}") // Endpoint to find article by code
-    public ArticleDto findByCodeArticle(@PathVariable String codeArticle) {
-        return articleService.findByCodeArticle(codeArticle);
+    @PostMapping("/save")
+    public ResponseEntity<ArticleDto> saveArticle(@RequestBody ArticleDto articleDto) {
+        ArticleDto savedArticle = articleService.save(articleDto);
+        return new ResponseEntity<>(savedArticle, HttpStatus.CREATED);
     }
 
-
-    @GetMapping("/articles") // Endpoint to retrieve all articles
-    public List<ArticleDto> findAll() {
-        return articleService.findAll();
+    @GetMapping("article/{id}")
+    public ResponseEntity<ArticleDto> getArticleById(@PathVariable("id") Integer id) {
+        ArticleDto articleDto = articleService.findById(id);
+        if (articleDto == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(articleDto, HttpStatus.OK);
     }
 
-    @Override
-    @GetMapping("/articles/{id}/ventes") // Endpoint to retrieve sales history for an article
-    public List<LigneVenteDto> findHistoriqueVentes(@PathVariable Integer idArticle) {
-        return articleService.findHistoriqueVentes(idArticle);
+    @GetMapping("/byCode/{codeArticle}")
+    public ResponseEntity<ArticleDto> getArticleByCode(@PathVariable("codeArticle") String codeArticle) {
+        ArticleDto articleDto = articleService.findByCodeArticle(codeArticle);
+        if (articleDto == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(articleDto, HttpStatus.OK);
     }
 
-    @Override
-    @GetMapping("/articles/{id}/commandes-client") // Endpoint to retrieve client order history for an article
-    public List<LigneCommandeClientDto> findHistoriaueCommandeClient(@PathVariable Integer idArticle) {
-        return articleService.findHistoriaueCommandeClient(idArticle);
+    @GetMapping("/all")
+    public ResponseEntity<List<ArticleDto>> getAllArticles() {
+        List<ArticleDto> articles = articleService.findAll();
+        return new ResponseEntity<>(articles, HttpStatus.OK);
     }
 
-
-
-
-    @GetMapping("/articles/category/{idCategory}") // Endpoint to retrieve all articles by category ID
-    public List<ArticleDto> findAllArticleByIdCategory(@PathVariable Integer idCategory) {
-        return articleService.findAllArticleByIdCategory(idCategory);
+    @GetMapping("/byCategory/{idCategory}")
+    public ResponseEntity<List<ArticleDto>> getArticlesByCategory(@PathVariable("idCategory") Integer idCategory) {
+        List<ArticleDto> articles = articleService.findAllArticleByIdCategory(idCategory);
+        return new ResponseEntity<>(articles, HttpStatus.OK);
     }
 
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Void> deleteArticle(@PathVariable("id") Integer id) {
+        if (id == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
-    @DeleteMapping("/articles/{id}") // Endpoint to delete an article by ID
-    public void delete(@PathVariable Integer id) {
         articleService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-*/
-
 }

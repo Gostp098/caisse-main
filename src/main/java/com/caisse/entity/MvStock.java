@@ -12,7 +12,7 @@ import java.time.Instant;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "mvtstk")
-public class MvtStk extends AbstractEntity{
+public class MvStock extends AbstractEntity{
     @Column(name = "datemvt")
     private Instant dateMvt;
 

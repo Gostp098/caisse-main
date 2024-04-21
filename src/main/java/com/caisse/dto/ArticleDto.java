@@ -1,6 +1,8 @@
 package com.caisse.dto;
 import com.caisse.entity.Article;
 import java.math.BigDecimal;
+import java.time.Instant;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -26,6 +28,8 @@ public class ArticleDto {
 
     private Integer idEntreprise;
 
+    private Instant creationDate;
+
     public static ArticleDto fromEntity(Article article) {
         if (article == null) {
             return null;
@@ -39,6 +43,7 @@ public class ArticleDto {
                 .prixUnitaireTtc(article.getPrixUnitaireTtc())
                 .tauxTva(article.getTauxTva())
                 .idEntreprise(article.getIdEntreprise())
+                .creationDate(article.getCreationDate())
                 .category(CategoryDto.fromEntity(article.getCategory()))
                 .build();
     }
@@ -56,6 +61,7 @@ public class ArticleDto {
         article.setPrixUnitaireTtc(articleDto.getPrixUnitaireTtc());
         article.setTauxTva(articleDto.getTauxTva());
         article.setIdEntreprise(articleDto.getIdEntreprise());
+        article.setCreationDate(articleDto.getCreationDate());
         article.setCategory(CategoryDto.toEntity(articleDto.getCategory()));
         return article;
     }
