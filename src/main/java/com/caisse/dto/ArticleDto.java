@@ -22,7 +22,7 @@ public class ArticleDto {
 
     private BigDecimal prixUnitaireTtc;
 
-    private String photo;
+    private byte[] photo;
 
     private CategoryDto category;
 

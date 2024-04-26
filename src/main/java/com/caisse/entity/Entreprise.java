@@ -25,8 +25,6 @@ public class Entreprise extends AbstractEntity {
 
     @Column(name = "adresseEntreprise")
     private String adresseEntreprise;
-  /*  @Embedded
-    private Adresse adresse;*/
 
     @Column(name = "codefiscal")
     private String codeFiscal;

@@ -26,8 +26,6 @@ public class Client extends AbstractEntity {
     @Column(name = "adresse")
     private String adresse;
 
-  /*  @Embedded
-    private Adresse adresse;*/
 
     @Column(name = "mail")
     private String mail;

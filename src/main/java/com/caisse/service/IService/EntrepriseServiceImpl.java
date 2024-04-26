@@ -1,8 +1,7 @@
 package com.caisse.service.IService;
 
-import ch.qos.logback.classic.Logger;
 import com.caisse.dto.EntrepriseDto;
-import com.caisse.exception.EntityNotFoundException;
+import com.caisse.entity.Entreprise;
 import com.caisse.exception.ErrorCodes;
 import com.caisse.exception.InvalidEntityException;
 import com.caisse.repository.EntrepriseRepository;
@@ -41,10 +40,10 @@ public class EntrepriseServiceImpl implements EntrepriseService {
         );
         return  savedEntreprise;
     }
-/*
+
     @Override
     public EntrepriseDto update(Integer id, EntrepriseDto updatedDto) {
-        EntrepriseDto existingEntreprise = EntrepriseDto.findById(id).get();
+        Entreprise existingEntreprise = entrepriseRepository.findById(id).get();
         // Validate the updated entity
         List<String> errors = EntrepriseValidator.validate(EntrepriseDto.fromEntity(existingEntreprise));
         if (!errors.isEmpty()) {
@@ -52,9 +51,9 @@ public class EntrepriseServiceImpl implements EntrepriseService {
             throw new InvalidEntityException("L'entreprise mise à jour n'est pas valide", ErrorCodes.ENTREPRISE_NOT_VALID, errors);
         }
         // Save the updated entity
-        EntrepriseDto updatedEntreprise = entrepriseRepository.save(existingEntreprise);
+        Entreprise updatedEntreprise = entrepriseRepository.save(existingEntreprise);
         return EntrepriseDto.fromEntity(updatedEntreprise);
     }
-*/
+
 
 }

@@ -33,8 +33,9 @@ public class Article extends AbstractEntity {
     @Column(name = "prixunitairettc")
     private BigDecimal prixUnitaireTtc;
 
+    @Lob
     @Column(name = "photo")
-    private String photo;
+    private byte[] photo;
 
     @Column(name = "identreprise")
     private Integer idEntreprise;

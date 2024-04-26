@@ -26,10 +26,10 @@ public EntrepriseController (EntrepriseService entrepriseService){
 
 
 
-   /* @PutMapping("/put")
-    public ResponseEntity<EntrepriseDto> Update(@RequestBody EntrepriseDto dto) {
-
-            return entrepriseService.Update(dto);
-        }*/
+    @PutMapping("/put/{id}")
+    public ResponseEntity<EntrepriseDto> updateEntreprise(@PathVariable Integer id, @RequestBody EntrepriseDto entrepriseDto) {
+        EntrepriseDto updatedEntrepriseDto = entrepriseService.update(id, entrepriseDto);
+        return ResponseEntity.ok(updatedEntrepriseDto);
+    }
 
 }

@@ -83,14 +83,6 @@ public class ArticleServiceImpl implements ArticleService {
                 .collect(Collectors.toList());
     }
 
-    /*
-    @Override
-    public List<LigneFactureDto> findHistoriqueVentes(Integer idArticle) {
-        return factureRepository.findAllByArticleId(idArticle).stream()
-                .map(LigneFactureDto::fromEntity)
-                .collect(Collectors.toList());
-    }
-*/
 
 
 
@@ -109,11 +101,6 @@ public class ArticleServiceImpl implements ArticleService {
             log.error("Article ID is null");
             return;
         }
-     /*    List<LigneFacture> ligneVentes = factureRepository.findAllByArticleId(id);
-        if (!ligneVentes.isEmpty()) {
-            throw new InvalidOperationException("Impossible de supprimer un article deja utilise dans des ventes",
-                    ErrorCodes.ARTICLE_ALREADY_IN_USE);
-        }  */
         articleRepository.deleteById(id);
     }
 }

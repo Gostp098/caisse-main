@@ -20,8 +20,6 @@ public class EntrepriseDto {
 
     private String codeFiscal;
 
-    private String photo;
-
     private String email;
 
     private String numTel;
@@ -39,7 +37,6 @@ public class EntrepriseDto {
                 .description(entreprise.getDescription())
                 .adresseEntreprise(entreprise.getAdresseEntreprise())
                 .codeFiscal(entreprise.getCodeFiscal())
-                .photo(entreprise.getPhoto())
                 .email(entreprise.getEmail())
                 .numTel(entreprise.getNumTel())
                 .steWeb(entreprise.getSteWeb())
@@ -56,7 +53,6 @@ public class EntrepriseDto {
         entreprise.setDescription(dto.getDescription());
         entreprise.setAdresseEntreprise(dto.getAdresseEntreprise());
         entreprise.setCodeFiscal(dto.getCodeFiscal());
-        entreprise.setPhoto(dto.getPhoto());
         entreprise.setEmail(dto.getEmail());
         entreprise.setNumTel(dto.getNumTel());
         entreprise.setSteWeb(dto.getSteWeb());
