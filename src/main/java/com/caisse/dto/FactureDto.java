@@ -10,10 +10,11 @@ import java.util.List;
 @Builder
 public class FactureDto {
     private Integer id;
+    private Instant creationDate;
 
     private String code;
 
-    private Instant dateVente;
+  //  private Instant dateVente;
 
     private String commentaire;
 
@@ -28,6 +29,7 @@ public class FactureDto {
         return FactureDto.builder()
                 .id(facture.getId())
                 .code(facture.getCode())
+                .creationDate(facture.getCreationDate())
                 .commentaire(facture.getCommentaire())
                 .build();
     }
@@ -38,7 +40,8 @@ public class FactureDto {
         }
         Facture facture = new Facture();
         facture.setId(dto.getId());
-        facture.setCode(facture.getCode());
+        facture.setCode(dto.getCode());
+        facture.setCreationDate(facture.getCreationDate());
         facture.setCommentaire(dto.getCommentaire());
         return facture;
     }

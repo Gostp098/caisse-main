@@ -18,9 +18,6 @@ public class FactureValidator {
         if (!StringUtils.hasLength(dto.getCode())) {
             errors.add("Veuillez renseigner le code de la Facture");
         }
-        if (dto.getDateVente() == null) {
-            errors.add("Veuillez renseigner la date de la Facture");
-        }
 
         return errors;
     }
