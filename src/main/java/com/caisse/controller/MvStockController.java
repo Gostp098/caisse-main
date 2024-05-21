@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api")
+@RequestMapping("/Stock")
 
 public class MvStockController {
     private final MvStockService mvStockService;

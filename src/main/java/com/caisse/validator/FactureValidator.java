@@ -10,16 +10,16 @@ public class FactureValidator {
     public static List<String> validate(FactureDto dto) {
         List<String> errors = new ArrayList<>();
         if (dto == null) {
-            errors.add("Veuillez renseigner le code de la commande");
-            errors.add("Veuillez renseigner la date de la commande");
+            errors.add("Veuillez renseigner le code de la Facture");
+            errors.add("Veuillez renseigner la date de la Facture");
             return errors;
         }
 
         if (!StringUtils.hasLength(dto.getCode())) {
-            errors.add("Veuillez renseigner le code de la commande");
+            errors.add("Veuillez renseigner le code de la Facture");
         }
         if (dto.getDateVente() == null) {
-            errors.add("Veuillez renseigner la date de la commande");
+            errors.add("Veuillez renseigner la date de la Facture");
         }
 
         return errors;
