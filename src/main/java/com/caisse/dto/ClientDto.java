@@ -1,8 +1,7 @@
 package com.caisse.dto;
 import com.caisse.entity.Client;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.List;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -24,7 +23,6 @@ public class ClientDto {
 
     private String numTel;
 
-    private Integer idEntreprise;
 
 
     public static ClientDto fromEntity(Client client) {
@@ -38,7 +36,6 @@ public class ClientDto {
                 .adresse(client.getAdresse())
                 .mail(client.getMail())
                 .numTel(client.getNumTel())
-                .idEntreprise(client.getIdEntreprise())
                 .build();
     }
 
@@ -53,7 +50,6 @@ public class ClientDto {
         client.setAdresse(dto.getAdresse());
         client.setMail(dto.getMail());
         client.setNumTel(dto.getNumTel());
-        client.setIdEntreprise(dto.getIdEntreprise());
         return client;
     }
 

@@ -1,6 +1,5 @@
 package com.caisse.dto;
 
-import com.caisse.entity.EtatCommande;
 import com.caisse.entity.StockUp;
 import lombok.*;
 
@@ -16,7 +15,6 @@ public class stockUpDto {
 
     private Instant dateCommande;
 
-    private EtatCommande etatCommande;
 
     //private FournisseurDto fournisseur;
 
@@ -31,9 +29,7 @@ public class stockUpDto {
                 .id(stockUp.getId())
                 .code(stockUp.getCode())
                 .dateCommande(stockUp.getDateCommande())
-              //  .fournisseur(FournisseurDto.fromEntity(stockUp.getFournisseur()))
-                .etatCommande(stockUp.getEtatCommande())
-                .idEntreprise(stockUp.getIdEntreprise())
+
                 .build();
     }
 
@@ -45,14 +41,9 @@ public class stockUpDto {
         stockUp.setId(dto.getId());
         stockUp.setCode(dto.getCode());
         stockUp.setDateCommande(dto.getDateCommande());
-     //   stockUp.setFournisseur(FournisseurDto.toEntity(dto.getFournisseur()));
-        stockUp.setIdEntreprise(dto.getIdEntreprise());
-        stockUp.setEtatCommande(dto.getEtatCommande());
+
         return stockUp;
     }
 
-    public boolean isCommandeLivree() {
-        return EtatCommande.LIVREE.equals(this.etatCommande);
-    }
 
 }

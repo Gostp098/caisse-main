@@ -17,7 +17,6 @@ public class LigneFactureDto {
 
     private BigDecimal prixUnitaire;
 
-    private Integer idEntreprise;
 
     public static LigneFactureDto fromEntity(LigneFacture ligneFacture) {
         if (ligneFacture == null) {
@@ -30,7 +29,6 @@ public class LigneFactureDto {
                 .article(ArticleDto.fromEntity(ligneFacture.getArticle()))
                 .quantite(ligneFacture.getQuantite())
                 .prixUnitaire(ligneFacture.getPrixUnitaire())
-                .idEntreprise(ligneFacture.getIdEntreprise())
                 .build();
     }
 
@@ -44,7 +42,6 @@ public class LigneFactureDto {
         ligneFacture.setArticle(ArticleDto.toEntity(dto.getArticle()));
         ligneFacture.setQuantite(dto.getQuantite());
         ligneFacture.setPrixUnitaire(dto.getPrixUnitaire());
-        ligneFacture.setIdEntreprise(dto.getIdEntreprise());
         return ligneFacture;
     }
 

@@ -19,12 +19,9 @@ public class StockUp extends AbstractEntity {
     @Column(name = "datecommande")
     private Instant dateCommande;
 
-    @Column(name = "etatcommande")
-    @Enumerated(EnumType.STRING)
-    private EtatCommande etatCommande;
 
-    @Column(name = "identreprise")
-    private Integer idEntreprise;
+
+
 
    // @ManyToOne
 

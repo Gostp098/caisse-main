@@ -1,6 +1,6 @@
 package com.caisse.entity;
 
-import java.util.List;
+
 import jakarta.persistence.*;
 
 import javax.persistence.Table;
@@ -33,8 +33,7 @@ public class Client extends AbstractEntity {
     @Column(name = "numTel")
     private String numTel;
 
-    @Column(name = "identreprise")
-    private Integer idEntreprise;
+
 
 
 }

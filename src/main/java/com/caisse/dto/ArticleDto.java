@@ -26,7 +26,7 @@ public class ArticleDto {
 
     private CategoryDto category;
 
-    private Integer idEntreprise;
+
 
     private Instant creationDate;
 
@@ -42,7 +42,6 @@ public class ArticleDto {
                 .prixUnitaireHt(article.getPrixUnitaireHt())
                 .prixUnitaireTtc(article.getPrixUnitaireTtc())
                 .tauxTva(article.getTauxTva())
-                .idEntreprise(article.getIdEntreprise())
                 .creationDate(article.getCreationDate())
                 .category(CategoryDto.fromEntity(article.getCategory()))
                 .build();
@@ -60,7 +59,6 @@ public class ArticleDto {
         article.setPrixUnitaireHt(articleDto.getPrixUnitaireHt());
         article.setPrixUnitaireTtc(articleDto.getPrixUnitaireTtc());
         article.setTauxTva(articleDto.getTauxTva());
-        article.setIdEntreprise(articleDto.getIdEntreprise());
         article.setCreationDate(articleDto.getCreationDate());
         article.setCategory(CategoryDto.toEntity(articleDto.getCategory()));
         return article;

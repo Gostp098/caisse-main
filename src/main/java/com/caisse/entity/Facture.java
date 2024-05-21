@@ -21,14 +21,13 @@ public class Facture extends AbstractEntity{
     @Column(name = "commentaire")
     private String commentaire;
 
-    @Column(name = "identreprise")
-    private Integer idEntreprise;
+
 
     @Column(name = "type_paiement")
     @Enumerated(EnumType.STRING)
     private Type_paiement Type_paiement;
 
-    @Column(name = "identreprise")
+
 
     @OneToMany(mappedBy = "facture")
     private List<LigneFacture> ligneFacture;

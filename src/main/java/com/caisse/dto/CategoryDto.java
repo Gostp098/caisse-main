@@ -36,7 +36,7 @@ public class CategoryDto {
                 .code(category.getCode())
                 .designation(category.getDesignation())
                 .creationDate(category.getCreationDate())
-                .idEntreprise(category.getIdEntreprise())
+
                 .build();
     }
 
@@ -51,7 +51,7 @@ public class CategoryDto {
         category.setCode(categoryDto.getCode());
         category.setCreationDate(categoryDto.getCreationDate());
         category.setDesignation(categoryDto.getDesignation());
-        category.setIdEntreprise(categoryDto.getIdEntreprise());
+
 
         return category;
     }

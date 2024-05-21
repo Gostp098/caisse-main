@@ -23,7 +23,6 @@ public class MvStockDto {
 
     private SourceMvtStk sourceMvt;
 
-    private Integer idEntreprise;
 
     public static MvStockDto fromEntity(MvStock mvtstk) {
         if (mvtstk == null) {
@@ -37,7 +36,6 @@ public class MvStockDto {
                 .article(ArticleDto.fromEntity(mvtstk.getArticle()))
                 .typeMvt(mvtstk.getTypeMvt())
                 .sourceMvt(mvtstk.getSourceMvt())
-                .idEntreprise(mvtstk.getIdEntreprise())
                 .build();
     }
 
@@ -53,7 +51,6 @@ public class MvStockDto {
         mvtStk.setArticle(ArticleDto.toEntity(dto.getArticle()));
         mvtStk.setTypeMvt(dto.getTypeMvt());
         mvtStk.setSourceMvt(dto.getSourceMvt());
-        mvtStk.setIdEntreprise(dto.getIdEntreprise());
         return mvtStk;
     }
 }

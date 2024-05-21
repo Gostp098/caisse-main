@@ -29,7 +29,6 @@ public class FactureDto {
                 .id(facture.getId())
                 .code(facture.getCode())
                 .commentaire(facture.getCommentaire())
-                .idEntreprise(facture.getIdEntreprise())
                 .build();
     }
 
@@ -41,7 +40,6 @@ public class FactureDto {
         facture.setId(dto.getId());
         facture.setCode(facture.getCode());
         facture.setCommentaire(dto.getCommentaire());
-        facture.setIdEntreprise(dto.getIdEntreprise());
         return facture;
     }
 }

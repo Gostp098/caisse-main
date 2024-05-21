@@ -19,7 +19,6 @@ public class LigneStockUpDto {
 
     private BigDecimal prixUnitaire;
 
-    private Integer idEntreprise;
     public static LigneStockUpDto fromEntity(LigneStockUp lignestockup) {
         if (lignestockup == null) {
             return null;
@@ -29,7 +28,6 @@ public class LigneStockUpDto {
                 .article(ArticleDto.fromEntity(lignestockup.getArticle()))
                 .quantite(lignestockup.getQuantite())
                 .prixUnitaire(lignestockup.getPrixUnitaire())
-                .idEntreprise(lignestockup.getIdEntreprise())
                 .build();
     }
 
@@ -43,7 +41,6 @@ public class LigneStockUpDto {
         ligneStockUp.setArticle(ArticleDto.toEntity(dto.getArticle()));
         ligneStockUp.setPrixUnitaire(dto.getPrixUnitaire());
         ligneStockUp.setQuantite(dto.getQuantite());
-        ligneStockUp.setIdEntreprise(dto.getIdEntreprise());
         return ligneStockUp;
     }
 
