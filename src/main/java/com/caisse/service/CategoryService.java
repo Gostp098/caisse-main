@@ -8,8 +8,10 @@ public interface CategoryService {
 
     CategoryDto save(CategoryDto dto);
 
+    CategoryDto updateCategory(Integer id, CategoryDto dto);
+
     CategoryDto findById(Integer id);
-    CategoryDto updateCategory(Integer id);
+    //CategoryDto updateCategory(Integer id);
 
     CategoryDto findByCode(String code);
 

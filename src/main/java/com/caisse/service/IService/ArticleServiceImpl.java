@@ -1,6 +1,7 @@
 package com.caisse.service.IService;
 
 import com.caisse.dto.ArticleDto;
+import com.caisse.entity.Article;
 import com.caisse.exception.EntityNotFoundException;
 import com.caisse.exception.ErrorCodes;
 import com.caisse.exception.InvalidEntityException;
@@ -94,6 +95,27 @@ public class ArticleServiceImpl implements ArticleService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public ArticleDto updateArticle(Integer id, ArticleDto dto) {
+        if (id == null || dto == null) {
+            log.error("Article ID or DTO is null");
+            throw new InvalidEntityException("L'article n'est pas valide", ErrorCodes.ARTICLE_NOT_VALID, List.of("ID or DTO is null"));
+        }
+
+        Article existingArticle = articleRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Aucun article avec l'ID = " + id + " n'a ete trouve dans la BDD",
+                        ErrorCodes.ARTICLE_NOT_FOUND));
+
+        ((Article) existingArticle).setCodeArticle(dto.getCodeArticle());
+        existingArticle.setDesignation(dto.getDesignation());
+        existingArticle.setPrixUnitaireHt(dto.getPrixUnitaireHt());
+        existingArticle.setTauxTva(dto.getTauxTva());
+
+        // Set other properties you want to update
+
+        return ArticleDto.fromEntity(articleRepository.save(existingArticle));
+    }
 
     @Override
     public void delete(Integer id) {

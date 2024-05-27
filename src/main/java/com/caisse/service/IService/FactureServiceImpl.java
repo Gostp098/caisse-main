@@ -52,35 +52,45 @@ public FactureServiceImpl(ArticleRepository articleRepository, FactureRepository
     }
 
 
-public FactureDto save(FactureDto dto) {
-    List<String> errors = FactureValidator.validate(dto);
-    if (!errors.isEmpty()) {
-        log.error("Facture n'est pas valid");
-        throw new InvalidEntityException("Facture n'est pas valid", ErrorCodes.FACTURE_NOT_VALID, errors);
-
-    }
-    List<String> articleErrors = new ArrayList<>();
-
-    dto.getLigneFacture().forEach(ligneFactureDto -> {
-        Optional<Article> article = articleRepository.findById(ligneFactureDto.getArticle().getId());
-        if (article.isEmpty()) {
-            articleErrors.add("Aucun article avec l'ID " + ligneFactureDto.getArticle().getId() + " n'a ete trouve dans la BDD");
+    public FactureDto save(FactureDto dto) {
+        // Validate FactureDto
+        List<String> errors = FactureValidator.validate(dto);
+        if (!errors.isEmpty()) {
+            log.error("Facture is not valid");
+            throw new InvalidEntityException("Facture is not valid", ErrorCodes.FACTURE_NOT_VALID, errors);
         }
-    });
-    if (!articleErrors.isEmpty()) {
-        log.error("One or more articles were not found in the DB, {}", errors);
-        throw new InvalidEntityException("Un ou plusieurs articles n'ont pas ete trouve dans la BDD", ErrorCodes.FACTURE_NOT_VALID, errors);
-    }
 
-    Facture savedFacture = factureRepository.save(FactureDto.toEntity(dto));
-    dto.getLigneFacture().forEach(ligneFactureDto -> {
-        LigneFacture ligneFacture = ligneFactureDto.toEntity(ligneFactureDto);
-        ligneFacture.setFacture(savedFacture);
-        ligneFactureRepository.save(ligneFacture);
-       updateMvStock(ligneFacture);
-    });
-    return FactureDto.fromEntity(savedFacture);
-}
+        // Validate associated articles
+        List<String> articleErrors = new ArrayList<>();
+        dto.getLigneFacture().forEach(ligneFactureDto -> {
+            Optional<Article> article = articleRepository.findById(ligneFactureDto.getArticle().getId());
+            if (article.isEmpty()) {
+                articleErrors.add("No article found in the database with ID: " + ligneFactureDto.getArticle().getId());
+            }
+        });
+
+        if (!articleErrors.isEmpty()) {
+            log.error("One or more articles were not found in the DB: {}", articleErrors);
+            throw new InvalidEntityException("One or more articles were not found in the DB", ErrorCodes.FACTURE_NOT_VALID, articleErrors);
+        }
+
+        // Save Facture entity
+        Facture savedFacture = factureRepository.save(FactureDto.toEntity(dto));
+
+        // Save associated LigneFacture entities
+        List<LigneFacture> ligneFactures = new ArrayList<>();
+        dto.getLigneFacture().forEach(ligneFactureDto -> {
+            LigneFacture ligneFacture = new LigneFacture();
+            ligneFacture.setFacture(savedFacture);
+            // Assuming toEntity() method is not necessary
+            ligneFacture.setArticle(articleRepository.findById(ligneFactureDto.getArticle().getId()).orElseThrow());
+            ligneFactures.add(ligneFacture);
+        });
+
+        ligneFactureRepository.saveAll(ligneFactures);
+
+        return FactureDto.fromEntity(savedFacture);
+    }
 
 
     @Override
@@ -89,10 +99,24 @@ public FactureDto save(FactureDto dto) {
             log.error("Facture ID is NULL");
             return null;
         }
-        return factureRepository.findById(id)
-                .map(FactureDto::fromEntity)
-                .orElseThrow(() -> new EntityNotFoundException("Aucun vente n'a ete trouve dans la BDD", ErrorCodes.FACTURE_NOT_FOUND));
+        Facture facture = factureRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Aucune vente n'a été trouvée dans la BDD",
+                        ErrorCodes.FACTURE_NOT_FOUND));
+
+        // Fetch associated LigneFacture entities
+        List<LigneFactureDto> ligneFactureDtos = facture.getLigneFacture().stream()
+                .map(LigneFactureDto::fromEntity)
+                .collect(Collectors.toList());
+
+        // Convert Facture entity to FactureDto
+        FactureDto factureDto = FactureDto.fromEntity(facture);
+
+        // Set the associated LigneFacture entities in the FactureDto
+        factureDto.setLigneFacture(ligneFactureDtos);
+
+        return factureDto;
     }
+
 
     @Override
     public FactureDto findByCode(String code) {
@@ -100,13 +124,24 @@ public FactureDto save(FactureDto dto) {
             log.error("Facture CODE is NULL");
             return null;
         }
+    
+    Facture facture = factureRepository.findFactureByCode(code)
+            .orElseThrow(() -> new EntityNotFoundException("Aucune vente n'a été trouvée dans la BDD",
+                    ErrorCodes.FACTURE_NOT_FOUND));
 
-        return factureRepository.findFactureByCode(code)
-                .map(FactureDto::fromEntity)
-                .orElseThrow(() -> new EntityNotFoundException(
-                        "Aucune vente client n'a ete trouve avec le CODE " + code, ErrorCodes.FACTURE_NOT_VALID
-                ));
-    }
+    // Fetch associated LigneFacture entities
+    List<LigneFactureDto> ligneFactureDtos = facture.getLigneFacture().stream()
+            .map(LigneFactureDto::fromEntity)
+            .collect(Collectors.toList());
+
+    // Convert Facture entity to FactureDto
+    FactureDto factureDto = FactureDto.fromEntity(facture);
+
+    // Set the associated LigneFacture entities in the FactureDto
+        factureDto.setLigneFacture(ligneFactureDtos);
+
+        return factureDto;
+}
 
     @Override
     public List<FactureDto> findAll() {

@@ -14,15 +14,17 @@ public interface ArticleService {
 
     List<ArticleDto> findAll();
 
-  //  List<LigneFactureDto> findHistoriqueVentes(Integer idArticle);
 
-
- //   List<LigneStockUpDto> findHistoriqueStockUp(Integer idArticle);
 
     List<ArticleDto> findAllArticleByIdCategory(Integer idCategory);
+
+    ArticleDto updateArticle(Integer id, ArticleDto dto);
 
     void delete(Integer id);
 
 
-
 }
+//  List<LigneFactureDto> findHistoriqueVentes(Integer idArticle);
+
+
+//   List<LigneStockUpDto> findHistoriqueStockUp(Integer idArticle);
